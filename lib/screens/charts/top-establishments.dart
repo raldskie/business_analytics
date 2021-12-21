@@ -16,6 +16,12 @@ class _TopEstablishmentsState extends State<TopEstablishments> {
         location: "P-1 Violeta",
         photo:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRioEI4ukddcJtBu_a_D5oMI49OLkLSBXPyNw&usqp=CAU",
+        visitorsPerDay: "247"),
+    Establishment(
+        name: "Begin Again",
+        location: "Kanto Tinio",
+        photo:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRioEI4ukddcJtBu_a_D5oMI49OLkLSBXPyNw&usqp=CAU",
         visitorsPerDay: "247")
   ];
   @override
@@ -50,34 +56,35 @@ class EstablishmentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        margin: EdgeInsets.symmetric(vertical: 5),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Row(children: [
-        ClipRRect(
-            borderRadius: BorderRadius.circular(7),
-            child: Image.network(establishment.photo,
-                height: 40, width: 40, fit: BoxFit.fill)),
-        SizedBox(
-          width: 10,
-        ),
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(children: [
+            ClipRRect(
+                borderRadius: BorderRadius.circular(7),
+                child: Image.network(establishment.photo,
+                    height: 40, width: 40, fit: BoxFit.fill)),
+            SizedBox(
+              width: 10,
+            ),
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              MyText(
+                label: establishment.name,
+                color: Colors.white,
+                isBold: true,
+              ),
+              MyText(
+                label: establishment.location,
+                color: Colors.white60,
+              )
+            ]),
+          ]),
           MyText(
-            label: establishment.name,
+            label: establishment.visitorsPerDay,
             color: Colors.white,
             isBold: true,
-          ),
-          MyText(
-            label: establishment.location,
-            color: Colors.white60,
+            size: 30,
           )
-        ]),
-      ]),
-      MyText(
-        label: establishment.visitorsPerDay,
-        color: Colors.white,
-        isBold: true,
-        size: 30,
-      )
-    ]));
+        ]));
   }
 }

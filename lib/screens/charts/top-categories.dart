@@ -58,19 +58,47 @@ class _TopCategories extends State {
 
   List<VCategory> categories = [
     VCategory(
-        value: 40,
-        title: '40%',
+        value: 20,
+        title: '20%',
         photo:
             "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
         name: "Farms",
         color: Colors.yellow),
     VCategory(
-        value: 60,
-        title: '60%',
+        value: 10,
+        title: '10%',
         photo:
             "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
-        name: "Farms",
-        color: Colors.blue)
+        name: "Museum",
+        color: Colors.blue),
+    VCategory(
+        value: 15,
+        title: '15%',
+        photo:
+            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
+        name: "Accommodation",
+        color: Colors.purple),
+    VCategory(
+        value: 10,
+        title: '10%',
+        photo:
+            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
+        name: "Activities",
+        color: Colors.red),
+    VCategory(
+        value: 20,
+        title: '20%',
+        photo:
+            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
+        name: "Water Parks",
+        color: Colors.pink),
+    VCategory(
+        value: 30,
+        title: '30%',
+        photo:
+            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
+        name: "Food Services",
+        color: Colors.green),
   ];
 
   List<PieChartSectionData> showingSections() {

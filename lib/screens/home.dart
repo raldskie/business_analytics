@@ -34,8 +34,8 @@ class _HomeState extends State<Home> {
               width: 20,
             ),
             Placeholder(
-              label: "Monthly visitors",
-              child: MonthlyVisitors(),
+              label: "Page clicks",
+              child: PageClicks(),
             ),
             SizedBox(
               width: 20,
@@ -51,8 +51,9 @@ class _HomeState extends State<Home> {
           Expanded(
               child: Row(children: [
             Placeholder(
-              label: "Page clicks",
-              child: PageClicks(),
+              flex: 2,
+              label: "Monthly visitors",
+              child: MonthlyVisitors(),
             ),
             SizedBox(
               width: 20,
@@ -69,14 +70,17 @@ class _HomeState extends State<Home> {
 }
 
 class Placeholder extends StatelessWidget {
-  Placeholder({Key? key, required this.label, this.child}) : super(key: key);
+  Placeholder({Key? key, required this.label, this.flex, this.child})
+      : super(key: key);
 
   String label;
+  int? flex;
   Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: flex ?? 1,
       child: Container(
         padding: EdgeInsets.all(15),
         height: double.infinity,

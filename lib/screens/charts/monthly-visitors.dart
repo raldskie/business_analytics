@@ -21,10 +21,21 @@ class _MonthlyVisitorsState extends State<MonthlyVisitors> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        MyText(
-          label: "No. of visits during these months",
-          isBold: true,
-          color: Colors.white,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            MyText(
+              label: "No. of visits during these months",
+              isBold: true,
+              color: Colors.white,
+            ),
+            TextButton(
+                onPressed: () => setState(() => showAvg = !showAvg),
+                child: MyText(
+                  label: "Show Average",
+                  color: Colors.white,
+                ))
+          ],
         ),
         SizedBox(
           height: 15,
@@ -73,11 +84,13 @@ class _MonthlyVisitorsState extends State<MonthlyVisitors> {
           getTitles: (value) {
             switch (value.toInt()) {
               case 2:
-                return 'MAR';
+                return 'August';
               case 5:
-                return 'JUN';
+                return 'September';
               case 8:
-                return 'SEP';
+                return 'October';
+              case 10:
+                return 'November';
             }
             return '';
           },
@@ -172,11 +185,13 @@ class _MonthlyVisitorsState extends State<MonthlyVisitors> {
           getTitles: (value) {
             switch (value.toInt()) {
               case 2:
-                return 'MAR';
+                return 'August';
               case 5:
-                return 'JUN';
+                return 'September';
               case 8:
-                return 'SEP';
+                return 'October';
+              case 10:
+                return 'November';
             }
             return '';
           },
