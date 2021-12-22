@@ -27,6 +27,15 @@ class _TopCategories extends State {
           color: Colors.white,
         ),
         SizedBox(
+          height: 30,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: categories.length,
+              itemBuilder: (context, index) => Legend(
+                  color: categories[index].color, name: categories[index].name)),
+        ),
+        SizedBox(
           height: 15,
         ),
         !isMobile(context)
@@ -55,11 +64,11 @@ class _TopCategories extends State {
                 ),
               )
             : SizedBox(
-              height: 300,
-              child: PieChart(
+                height: 300,
+                child: PieChart(
                   PieChartData(
-                      pieTouchData: PieTouchData(
-                          touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                      pieTouchData: PieTouchData(touchCallback:
+                          (FlTouchEvent event, pieTouchResponse) {
                         setState(() {
                           if (!event.isInterestedForInteractions ||
                               pieTouchResponse == null ||
@@ -78,7 +87,7 @@ class _TopCategories extends State {
                       centerSpaceRadius: 0,
                       sections: showingSections()),
                 ),
-            ),
+              ),
       ],
     );
   }
@@ -88,42 +97,42 @@ class _TopCategories extends State {
         value: 20,
         title: '20%',
         photo:
-            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
+            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_thumbnail.jpg",
         name: "Farms",
         color: Colors.yellow),
     VCategory(
         value: 10,
         title: '10%',
         photo:
-            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
+            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607565bdeb4b1f0da480b187/Icon/Icon_thumbnail.jpg",
         name: "Museum",
         color: Colors.blue),
     VCategory(
         value: 15,
         title: '15%',
         photo:
-            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
+            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/6129ca033a1726fc45828e0f/Icon/Icon_thumbnail.jpg",
         name: "Accommodation",
         color: Colors.purple),
     VCategory(
         value: 10,
         title: '10%',
         photo:
-            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
+            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/6129caa03a1726fc45828e10/Icon/Icon_thumbnail.jpg",
         name: "Activities",
         color: Colors.red),
     VCategory(
         value: 20,
         title: '20%',
         photo:
-            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
+            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/6129ccbf3a1726fc45828e13/Icon/Icon_thumbnail.jpg",
         name: "Water Parks",
         color: Colors.pink),
     VCategory(
         value: 30,
         title: '30%',
         photo:
-            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a97/Icon/Icon_small.jpg",
+            "https://visitour-staging.s3.ap-southeast-1.amazonaws.com/607564a97d84680d7f2b3a90/Icon/Icon_thumbnail.jpg",
         name: "Food Services",
         color: Colors.green),
   ];
@@ -190,7 +199,7 @@ class _Badge extends StatelessWidget {
           ),
         ],
       ),
-      padding: EdgeInsets.all(size * .15),
+      padding: EdgeInsets.all(size * .05),
       child: Center(
         child: ClipRRect(
             borderRadius: BorderRadius.circular(100),
@@ -198,5 +207,30 @@ class _Badge extends StatelessWidget {
                 Image.network(photo, width: 50, height: 50, fit: BoxFit.fill)),
       ),
     );
+  }
+}
+
+class Legend extends StatelessWidget {
+  Legend({Key? key, required this.color, required this.name}) : super(key: key);
+
+  Color color;
+  String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      Container(
+        color: color,
+        height: 12,
+        width: 12,
+      ),
+      SizedBox(width: 5),
+      MyText(
+        label: name,
+        color: Colors.white,
+        size: 12,
+      ),
+      SizedBox(width: 15),
+    ]);
   }
 }

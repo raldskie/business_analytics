@@ -1,20 +1,8 @@
-import 'dart:math';
-
-import 'package:business_analytics/utilities/mobile.dart';
 import 'package:business_analytics/utilities/themes.dart';
 import 'package:business_analytics/widgets/Text.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class AvailedOffers extends StatefulWidget {
-  final List<Color> availableColors = const [
-    Colors.purpleAccent,
-    Colors.yellow,
-    Colors.lightBlue,
-    Colors.orange,
-    Colors.pink,
-    Colors.redAccent,
-  ];
   AvailedOffers({Key? key}) : super(key: key);
 
   @override
@@ -22,217 +10,98 @@ class AvailedOffers extends StatefulWidget {
 }
 
 class _AvailedOffersState extends State<AvailedOffers> {
-  final Color barBackgroundColor = MyTheme.PRIMARY_COLOR_500;
-  final Duration animDuration = const Duration(milliseconds: 250);
-
-  int touchedIndex = -1;
-
-  bool isPlaying = false;
-
   @override
   Widget build(BuildContext context) {
-    return !isMobile(context)
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MyText(
-                label: "Most availed offers",
-                isBold: true,
-                color: Colors.white,
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Expanded(
-                child: SizedBox.expand(
-                  child: BarChart(
-                    mainBarData(),
-                    swapAnimationDuration: animDuration,
-                  ),
-                ),
-              ),
-            ],
-          )
-        : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    return Container(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+            child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
             MyText(
               label: "Most availed offers",
               isBold: true,
               color: Colors.white,
             ),
-            SizedBox(
-              height: 15,
+            MyText(
+              label: "November",
+              isBold: true,
+              color: Colors.blueAccent[200],
             ),
-            SizedBox(
-              height: 300,
-              child: BarChart(
-                mainBarData(),
-                swapAnimationDuration: animDuration,
-              ),
-            ),
-          ]);
-  }
-
-  BarChartGroupData makeGroupData(
-    int x,
-    double y, {
-    bool isTouched = false,
-    Color barColor = Colors.white,
-    double width = 22,
-    List<int> showTooltips = const [],
-  }) {
-    return BarChartGroupData(
-      x: x,
-      barRods: [
-        BarChartRodData(
-          y: isTouched ? y + 1 : y,
-          colors: isTouched ? [Colors.yellow] : [barColor],
-          width: width,
-          borderSide: isTouched
-              ? BorderSide(color: Colors.yellow, width: 1)
-              : const BorderSide(color: Colors.white, width: 0),
-          backDrawRodData: BackgroundBarChartRodData(
-            show: true,
-            y: 20,
-            colors: [barBackgroundColor],
-          ),
-        ),
+          ],
+        )),
+        Column(children: [
+          Row(children: [
+            OfferItem(
+                icon: 'assets/img/hotel.png', name: 'Accomm.', stat: '30k'),
+            SizedBox(width: 10),
+            OfferItem(
+                icon: 'assets/img/store.png', name: 'Products', stat: '18.6k'),
+          ]),
+          SizedBox(height: 10),
+          Row(children: [
+            OfferItem(icon: 'assets/img/guide.png', name: 'Tours', stat: '5k'),
+            SizedBox(width: 10),
+            OfferItem(icon: 'assets/img/menu.png', name: 'Food', stat: '44.6k'),
+          ]),
+          SizedBox(height: 10),
+          Row(children: [
+            OfferItem(
+                icon: 'assets/img/truck.png', name: 'Transpo.', stat: '23.1k'),
+            SizedBox(width: 10),
+            OfferItem(
+                icon: 'assets/img/package.png',
+                name: 'Packages',
+                stat: '27.6k'),
+          ])
+        ]),
       ],
-      showingTooltipIndicators: showTooltips,
-    );
+    ));
   }
+}
 
-  List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
-        switch (i) {
-          case 0:
-            return makeGroupData(0, 5, isTouched: i == touchedIndex);
-          case 1:
-            return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
-          case 2:
-            return makeGroupData(2, 5, isTouched: i == touchedIndex);
-          case 3:
-            return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
-          case 4:
-            return makeGroupData(4, 9, isTouched: i == touchedIndex);
-          case 5:
-            return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
-          case 6:
-            return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
-          default:
-            return throw Error();
-        }
-      });
+class OfferItem extends StatelessWidget {
+  OfferItem(
+      {Key? key, required this.icon, required this.name, required this.stat})
+      : super(key: key);
 
-  BarChartData mainBarData() {
-    return BarChartData(
-      barTouchData: BarTouchData(
-        touchTooltipData: BarTouchTooltipData(
-            tooltipBgColor: Colors.blueGrey,
-            getTooltipItem: (group, groupIndex, rod, rodIndex) {
-              String weekDay;
-              switch (group.x.toInt()) {
-                case 0:
-                  weekDay = 'Monday';
-                  break;
-                case 1:
-                  weekDay = 'Tuesday';
-                  break;
-                case 2:
-                  weekDay = 'Wednesday';
-                  break;
-                case 3:
-                  weekDay = 'Thursday';
-                  break;
-                case 4:
-                  weekDay = 'Friday';
-                  break;
-                case 5:
-                  weekDay = 'Saturday';
-                  break;
-                case 6:
-                  weekDay = 'Sunday';
-                  break;
-                default:
-                  throw Error();
-              }
-              return BarTooltipItem(
-                weekDay + '\n',
-                const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: (rod.y - 1).toString(),
-                    style: const TextStyle(
-                      color: Colors.yellow,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              );
-            }),
-        touchCallback: (FlTouchEvent event, barTouchResponse) {
-          setState(() {
-            if (!event.isInterestedForInteractions ||
-                barTouchResponse == null ||
-                barTouchResponse.spot == null) {
-              touchedIndex = -1;
-              return;
-            }
-            touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
-          });
-        },
+  String icon;
+  String name;
+  String stat;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: MyTheme.PRIMARY_COLOR_850,
+            borderRadius: BorderRadius.circular(5)),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Image(
+              image: AssetImage(icon),
+              width: 25,
+              height: 25,
+            ),
+            SizedBox(height: 5),
+            MyText(
+              label: name,
+              color: Colors.white,
+            ),
+          ]),
+          MyText(
+            label: stat,
+            color: Colors.blueAccent[200],
+            size: 18,
+            isBold: true,
+          )
+        ]),
       ),
-      titlesData: FlTitlesData(
-        show: true,
-        rightTitles: SideTitles(showTitles: false),
-        topTitles: SideTitles(showTitles: false),
-        bottomTitles: SideTitles(
-          showTitles: true,
-          getTextStyles: (context, value) => const TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
-          margin: 16,
-          getTitles: (double value) {
-            switch (value.toInt()) {
-              case 0:
-                return 'M';
-              case 1:
-                return 'T';
-              case 2:
-                return 'W';
-              case 3:
-                return 'T';
-              case 4:
-                return 'F';
-              case 5:
-                return 'S';
-              case 6:
-                return 'S';
-              default:
-                return '';
-            }
-          },
-        ),
-        leftTitles: SideTitles(
-          showTitles: false,
-        ),
-      ),
-      borderData: FlBorderData(
-        show: false,
-      ),
-      barGroups: showingGroups(),
-      gridData: FlGridData(show: false),
     );
-  }
-
-  Future<dynamic> refreshState() async {
-    setState(() {});
-    await Future<dynamic>.delayed(
-        animDuration + const Duration(milliseconds: 50));
-    if (isPlaying) {
-      await refreshState();
-    }
   }
 }

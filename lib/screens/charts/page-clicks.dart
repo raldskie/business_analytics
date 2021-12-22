@@ -36,7 +36,7 @@ class _LineChart extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         MyText(
-          label: "Visits per day",
+          label: "Page clicks",
           isBold: true,
           color: Colors.white,
         ),

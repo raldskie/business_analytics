@@ -53,3 +53,9 @@ flutter:
   assets:
     - assets/img/logo-color.png
     - assets/img/user.jpg
+    - assets/img/guide.png
+    - assets/img/hotel.png
+    - assets/img/menu.png
+    - assets/img/package.png
+    - assets/img/store.png
+    - assets/img/truck.png
