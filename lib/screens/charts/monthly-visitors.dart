@@ -1,3 +1,4 @@
+import 'package:business_analytics/utilities/mobile.dart';
 import 'package:business_analytics/widgets/Text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -40,13 +41,24 @@ class _MonthlyVisitorsState extends State<MonthlyVisitors> {
         SizedBox(
           height: 15,
         ),
-        Expanded(
-          child: LineChart(
-            showAvg ? avgData() : mainData(),
-            swapAnimationDuration: Duration(milliseconds: 150), // Optional
-            swapAnimationCurve: Curves.linear,
-          ),
-        ),
+        !isMobile(context)
+            ? Expanded(
+                child: LineChart(
+                  showAvg ? avgData() : mainData(),
+                  swapAnimationDuration:
+                      Duration(milliseconds: 150), // Optional
+                  swapAnimationCurve: Curves.linear,
+                ),
+              )
+            : SizedBox(
+                height: 300,
+                child: LineChart(
+                  showAvg ? avgData() : mainData(),
+                  swapAnimationDuration:
+                      Duration(milliseconds: 150), // Optional
+                  swapAnimationCurve: Curves.linear,
+                ),
+              ),
       ],
     );
   }

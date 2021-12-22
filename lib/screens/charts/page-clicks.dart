@@ -1,3 +1,4 @@
+import 'package:business_analytics/utilities/mobile.dart';
 import 'package:business_analytics/widgets/Text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -50,12 +51,20 @@ class _LineChart extends StatelessWidget {
         SizedBox(
           height: 30,
         ),
-        Expanded(
-          child: LineChart(
-            sampleData1,
-            swapAnimationDuration: const Duration(milliseconds: 250),
-          ),
-        ),
+        !isMobile(context)
+            ? Expanded(
+                child: LineChart(
+                  sampleData1,
+                  swapAnimationDuration: const Duration(milliseconds: 250),
+                ),
+              )
+            : SizedBox(
+              height: 300,
+                child: LineChart(
+                  sampleData1,
+                  swapAnimationDuration: const Duration(milliseconds: 250),
+                ),
+              ),
       ],
     );
   }

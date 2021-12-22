@@ -1,4 +1,5 @@
 import 'package:business_analytics/models/Establishment.dart';
+import 'package:business_analytics/utilities/mobile.dart';
 import 'package:business_analytics/widgets/Text.dart';
 import 'package:flutter/material.dart';
 
@@ -37,11 +38,17 @@ class _TopEstablishmentsState extends State<TopEstablishments> {
         SizedBox(
           height: 15,
         ),
-        Expanded(
-            child: ListView.builder(
+        !isMobile(context)
+            ? Expanded(
+                child: ListView.builder(
+                    itemCount: topEstablishments.length,
+                    itemBuilder: (context, index) => EstablishmentItem(
+                        establishment: topEstablishments[index])))
+            : ListView.builder(
+                shrinkWrap: true,
                 itemCount: topEstablishments.length,
-                itemBuilder: (context, index) => EstablishmentItem(
-                    establishment: topEstablishments[index]))),
+                itemBuilder: (context, index) =>
+                    EstablishmentItem(establishment: topEstablishments[index])),
       ],
     );
   }

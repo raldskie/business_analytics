@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:business_analytics/utilities/mobile.dart';
 import 'package:business_analytics/utilities/themes.dart';
 import 'package:business_analytics/widgets/Text.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -30,27 +31,45 @@ class _AvailedOffersState extends State<AvailedOffers> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        MyText(
-          label: "Most availed offers",
-          isBold: true,
-          color: Colors.white,
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Expanded(
-          child: SizedBox.expand(
-            child: BarChart(
-              mainBarData(),
-              swapAnimationDuration: animDuration,
+    return !isMobile(context)
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MyText(
+                label: "Most availed offers",
+                isBold: true,
+                color: Colors.white,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Expanded(
+                child: SizedBox.expand(
+                  child: BarChart(
+                    mainBarData(),
+                    swapAnimationDuration: animDuration,
+                  ),
+                ),
+              ),
+            ],
+          )
+        : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            MyText(
+              label: "Most availed offers",
+              isBold: true,
+              color: Colors.white,
             ),
-          ),
-        ),
-      ],
-    );
+            SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              height: 300,
+              child: BarChart(
+                mainBarData(),
+                swapAnimationDuration: animDuration,
+              ),
+            ),
+          ]);
   }
 
   BarChartGroupData makeGroupData(
