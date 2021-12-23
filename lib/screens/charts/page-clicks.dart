@@ -1,4 +1,5 @@
 import 'package:business_analytics/utilities/mobile.dart';
+import 'package:business_analytics/utilities/themes.dart';
 import 'package:business_analytics/widgets/Text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -32,40 +33,45 @@ class _LineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        MyText(
-          label: "Page clicks",
-          isBold: true,
-          color: Colors.white,
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Row(children: [
-          Legend(color: Colors.red, name: "Search"),
-          Legend(color: Color(0xffaa4cfc), name: "Home Feed"),
-          Legend(color: Color(0xff4af699), name: "Referrals/Links"),
-        ]),
-        SizedBox(
-          height: 30,
-        ),
-        !isMobile(context)
-            ? Expanded(
-                child: LineChart(
-                  sampleData1,
-                  swapAnimationDuration: const Duration(milliseconds: 250),
+    return Container(
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+          color: MyTheme.PRIMARY_COLOR, borderRadius: BorderRadius.circular(5)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MyText(
+            label: "Page clicks",
+            isBold: true,
+            color: Colors.white,
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(children: [
+            Legend(color: Colors.red, name: "Search"),
+            Legend(color: Color(0xffaa4cfc), name: "Home Feed"),
+            Legend(color: Color(0xff4af699), name: "Referrals/Links"),
+          ]),
+          SizedBox(
+            height: 30,
+          ),
+          !isMobile(context)
+              ? Expanded(
+                  child: LineChart(
+                    sampleData1,
+                    swapAnimationDuration: const Duration(milliseconds: 250),
+                  ),
+                )
+              : SizedBox(
+                  height: 300,
+                  child: LineChart(
+                    sampleData1,
+                    swapAnimationDuration: const Duration(milliseconds: 250),
+                  ),
                 ),
-              )
-            : SizedBox(
-              height: 300,
-                child: LineChart(
-                  sampleData1,
-                  swapAnimationDuration: const Duration(milliseconds: 250),
-                ),
-              ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -173,7 +179,7 @@ class _LineChart extends StatelessWidget {
           FlSpot(1, 1),
           FlSpot(3, 1.5),
           FlSpot(5, 1.4),
-          FlSpot(7, 3.4),
+          FlSpot(7, 3),
           FlSpot(10, 2),
           FlSpot(12, 2.2),
           FlSpot(13, 1.8),
@@ -190,12 +196,12 @@ class _LineChart extends StatelessWidget {
           const Color(0x00aa4cfc),
         ]),
         spots: const [
-          FlSpot(1, 1),
-          FlSpot(3, 2.8),
-          FlSpot(7, 1.2),
+          FlSpot(1, 3),
+          FlSpot(3, 3.2),
+          FlSpot(7, 2.6),
           FlSpot(10, 2.8),
-          FlSpot(12, 2.6),
-          FlSpot(13, 3.9),
+          FlSpot(12, 3.5),
+          FlSpot(13, 3.3),
         ],
       );
 
@@ -207,9 +213,9 @@ class _LineChart extends StatelessWidget {
         dotData: FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
         spots: const [
-          FlSpot(1, 2.8),
-          FlSpot(3, 1.9),
-          FlSpot(6, 3),
+          FlSpot(1, 0.8),
+          FlSpot(3, 1),
+          FlSpot(6, 2),
           FlSpot(10, 1.3),
           FlSpot(13, 2.5),
         ],

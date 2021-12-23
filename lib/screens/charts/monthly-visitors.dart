@@ -1,4 +1,5 @@
 import 'package:business_analytics/utilities/mobile.dart';
+import 'package:business_analytics/utilities/themes.dart';
 import 'package:business_analytics/widgets/Text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -19,47 +20,52 @@ class _MonthlyVisitorsState extends State<MonthlyVisitors> {
   bool showAvg = false;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            MyText(
-              label: "No. of visits during these months",
-              isBold: true,
-              color: Colors.white,
-            ),
-            TextButton(
-                onPressed: () => setState(() => showAvg = !showAvg),
-                child: MyText(
-                  label: "Show Average",
-                  color: Colors.white,
-                ))
-          ],
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        !isMobile(context)
-            ? Expanded(
-                child: LineChart(
-                  showAvg ? avgData() : mainData(),
-                  swapAnimationDuration:
-                      Duration(milliseconds: 150), // Optional
-                  swapAnimationCurve: Curves.linear,
-                ),
-              )
-            : SizedBox(
-                height: 300,
-                child: LineChart(
-                  showAvg ? avgData() : mainData(),
-                  swapAnimationDuration:
-                      Duration(milliseconds: 150), // Optional
-                  swapAnimationCurve: Curves.linear,
-                ),
+    return Container(
+            padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+          color: MyTheme.PRIMARY_COLOR, borderRadius: BorderRadius.circular(5)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              MyText(
+                label: "No. of visits during these months",
+                isBold: true,
+                color: Colors.white,
               ),
-      ],
+              TextButton(
+                  onPressed: () => setState(() => showAvg = !showAvg),
+                  child: MyText(
+                    label: showAvg ? "Hide average" : "Show Average",
+                    color: Colors.white,
+                  ))
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          !isMobile(context)
+              ? Expanded(
+                  child: LineChart(
+                    showAvg ? avgData() : mainData(),
+                    swapAnimationDuration:
+                        Duration(milliseconds: 150), // Optional
+                    swapAnimationCurve: Curves.linear,
+                  ),
+                )
+              : SizedBox(
+                  height: 300,
+                  child: LineChart(
+                    showAvg ? avgData() : mainData(),
+                    swapAnimationDuration:
+                        Duration(milliseconds: 150), // Optional
+                    swapAnimationCurve: Curves.linear,
+                  ),
+                ),
+        ],
+      ),
     );
   }
 
@@ -101,8 +107,6 @@ class _MonthlyVisitorsState extends State<MonthlyVisitors> {
                 return 'September';
               case 8:
                 return 'October';
-              case 10:
-                return 'November';
             }
             return '';
           },

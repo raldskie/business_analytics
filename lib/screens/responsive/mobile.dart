@@ -38,7 +38,10 @@ class _HomeState extends State<Mobile> {
         SizedBox(
           height: 20,
         ),
-        TopEstablishments()
+        TopEstablishments(),
+        SizedBox(
+          height: 20,
+        ),
       ]),
     );
   }

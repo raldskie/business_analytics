@@ -26,39 +26,26 @@ class _HomeState extends State<Desktop> {
           MyHeader(name: "Stephen Strange"),
           Expanded(
               child: Row(children: [
-            MyPlaceholder(
-              label: "Most availed offers",
-              child: AvailedOffers(),
-            ),
+            Expanded(child: AvailedOffers()),
             SizedBox(
               width: 20,
             ),
-            MyPlaceholder(
-              label: "Page clicks",
-              child: PageClicks(),
-            ),
+            Expanded(child: PageClicks()),
             SizedBox(
               width: 20,
             ),
-            MyPlaceholder(
-              label: "Top categories",
-              child: TopCategories(),
-            )
+            Expanded(child: TopCategories()),
           ])),
           SizedBox(
             height: 20,
           ),
           Expanded(
               child: Row(children: [
-            MyPlaceholder(
-              flex: 2,
-              label: "Monthly visitors",
-              child: MonthlyVisitors(),
-            ),
+            Expanded(flex: 2, child: MonthlyVisitors()),
             SizedBox(
               width: 20,
             ),
-            MyPlaceholder(label: "Top establishments", child: TopEstablishments())
+            Expanded(child: TopEstablishments())
           ])),
           SizedBox(
             height: 20,
@@ -68,5 +55,3 @@ class _HomeState extends State<Desktop> {
     );
   }
 }
-
-
