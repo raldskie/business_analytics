@@ -206,8 +206,6 @@ class _MonthlyVisitorsState extends State<MonthlyVisitors> {
                 return 'September';
               case 8:
                 return 'October';
-              case 10:
-                return 'November';
             }
             return '';
           },
